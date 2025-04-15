@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Magical Mystery Theater</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
 <body>
     <div class="container container-fluid">
         <h1 class="mt-5">Welcome to the Magical Mystery Theater</h1>
@@ -52,11 +53,23 @@
         const MATINEE_DISCOUNT = 3;
 
         function buyTicket() {
-            const age = prompt('What is your age?');
+            const ageInput = prompt('What is your age?');
+            const age = Number(ageInput);
+
+            if (isNaN(age) || age <= 0) {
+                alert('Please enter a valid age.');
+                return;
+            }
+
             let cost = getBaseTicketCost(age);
 
-            const isMatinee = prompt('Are you attending a matinee show?');
-            cost = applyMatineeDiscount(cost, isMatinee.toLowerCase());
+            const isMatineeInput = prompt('Are you attending a matinee show?');
+            if (!isMatineeInput) {
+                alert('Please answer if you are attending a matinee show.');
+                return;
+            }
+
+            cost = applyMatineeDiscount(cost, isMatineeInput.toLowerCase());
 
             alert('Your ticket will cost: $' + cost);
         }
